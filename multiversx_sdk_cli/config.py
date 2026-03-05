@@ -129,7 +129,7 @@ def get_defaults() -> dict[str, Any]:
     return {
         "dependencies.golang.resolution": "SDK",
         "dependencies.golang.tag": "go1.23.10",
-        "dependencies.golang.urlTemplate.linux": "https://golang.org/dl/{TAG}.linux-amd64.tar.gz",
+        "dependencies.golang.urlTemplate.linux": "https://golang.org/dl/{TAG}.linux-{ARCH}.tar.gz",
         "dependencies.golang.urlTemplate.osx": "https://golang.org/dl/{TAG}.darwin-amd64.tar.gz",
         "dependencies.golang.urlTemplate.windows": "https://golang.org/dl/{TAG}.windows-amd64.zip",
         "dependencies.testwallets.tag": "v1.0.0",

@@ -1,4 +1,5 @@
 import logging
+import platform
 import os
 import shutil
 from os import path
@@ -122,13 +123,22 @@ class StandaloneModule(DependencyModule):
         return config.get_dependency_parent_directory(self.key)
 
     def _get_download_url(self, tag: str) -> str:
-        platform = workstation.get_platform()
+        plat = workstation.get_platform()
 
-        url = config.get_dependency_url(self.key, tag, platform)
+        url = config.get_dependency_url(self.key, tag, plat)
         if not url:
-            raise errors.PlatformNotSupported(self.key, platform)
+            raise errors.PlatformNotSupported(self.key, plat)
 
-        url = url.replace("{TAG}", tag)
+        machine = platform.machine().lower()
+        arch_map = {
+            "x86_64": "amd64",
+            "amd64": "amd64",
+            "aarch64": "arm64",
+            "arm64": "arm64",
+        }
+        arch = arch_map.get(machine, "amd64")
+
+        url = url.replace("{TAG}", tag).replace("{ARCH}", arch)
         return url
 
     def _get_archive_path(self, tag: str) -> Path:

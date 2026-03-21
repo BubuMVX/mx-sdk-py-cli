@@ -58,11 +58,10 @@ from multiversx_sdk_cli.interfaces import IAccount
 from multiversx_sdk_cli.signing_wrapper import SigningWrapper
 from multiversx_sdk_cli.simulation import Simulator
 from multiversx_sdk_cli.transactions import send_and_wait_for_result
-from multiversx_sdk_cli.utils import log_explorer_transaction
+from multiversx_sdk_cli.utils import log_explorer_transaction, parse_headers_list
 from multiversx_sdk_cli.ux import confirm_continuation
 
 logger = logging.getLogger("cli_shared")
-
 
 trusted_cosigner_service_url_by_chain_id = {
     "1": "https://tools.multiversx.com/guardian",
@@ -118,11 +117,11 @@ def add_command_subparser(subparsers: Any, group: str, command: str, description
 
 
 def add_tx_args(
-    args: list[str],
-    sub: Any,
-    with_nonce: bool = True,
-    with_receiver: bool = True,
-    with_data: bool = True,
+        args: list[str],
+        sub: Any,
+        with_nonce: bool = True,
+        with_receiver: bool = True,
+        with_data: bool = True,
 ):
     if with_nonce:
         sub.add_argument(
@@ -270,6 +269,21 @@ def add_relayed_v3_wallet_args(args: list[str], sub: Any):
 
 def add_proxy_arg(sub: Any):
     sub.add_argument("--proxy", type=str, help="🔗 the URL of the proxy")
+    sub.add_argument(
+        "--proxy-headers",
+        nargs="+",
+        metavar="KEY=VALUE",
+        help="custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'",
+    )
+
+
+def parse_proxy_headers(proxy_headers: Optional[list[str]]) -> dict[str, str]:
+    if not proxy_headers:
+        return {}
+    for item in proxy_headers:
+        if "=" not in item:
+            raise ArgumentsNotProvidedError(f"Invalid proxy header (expected KEY=VALUE): {item!r}")
+    return parse_headers_list(proxy_headers)
 
 
 def add_outfile_arg(sub: Any, what: str = ""):
@@ -302,7 +316,7 @@ def add_token_transfers_args(sub: Any):
         "--token-transfers",
         nargs="+",
         help="token transfers for transfer & execute, as [token, amount] "
-        "E.g. --token-transfers NFT-123456-0a 1 ESDT-987654 100000000",
+             "E.g. --token-transfers NFT-123456-0a 1 ESDT-987654 100000000",
     )
 
 
@@ -843,9 +857,9 @@ def initialize_gas_limit_estimator(args: Any) -> Union[GasLimitEstimator, None]:
 
 
 def set_options_for_hash_signing_if_needed(
-    transaction: Transaction,
-    guardian: Union[IAccount, None],
-    relayer: Union[IAccount, None],
+        transaction: Transaction,
+        guardian: Union[IAccount, None],
+        relayer: Union[IAccount, None],
 ):
     transaction_computer = TransactionComputer()
 
@@ -858,10 +872,10 @@ def set_options_for_hash_signing_if_needed(
 
 
 def alter_transaction_and_sign_again_if_needed(
-    args: Any,
-    tx: Transaction,
-    sender: IAccount,
-    guardian_and_relayer_data: GuardianRelayerData,
+        args: Any,
+        tx: Transaction,
+        sender: IAccount,
+        guardian_and_relayer_data: GuardianRelayerData,
 ):
     initial_tx = deepcopy(tx)
 
@@ -886,9 +900,9 @@ def alter_transaction_and_sign_again_if_needed(
 
 
 def _alter_version_and_options_if_provided(
-    args: Any,
-    initial_tx: Transaction,
-    transaction: Transaction,
+        args: Any,
+        initial_tx: Transaction,
+        transaction: Transaction,
 ) -> bool:
     """Alters the transaction version and options if they are provided in args.
     Returns True if any alteration was made, False otherwise.
@@ -913,9 +927,9 @@ def _alter_version_and_options_if_provided(
 
 
 def _sign_transaction(
-    transaction: Transaction,
-    sender: Optional[IAccount] = None,
-    guardian_and_relayer_data: GuardianRelayerData = GuardianRelayerData(),
+        transaction: Transaction,
+        sender: Optional[IAccount] = None,
+        guardian_and_relayer_data: GuardianRelayerData = GuardianRelayerData(),
 ):
     signer = SigningWrapper()
     signer.sign_transaction(

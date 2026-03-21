@@ -183,3 +183,12 @@ def get_explorer_by_chain_id(chain_id: str) -> str:
         return explorers_by_chain_id[chain_id]
     except KeyError:
         return ""
+
+
+def parse_headers_list(items: list[str]) -> dict[str, str]:
+    """Parses a list of KEY=VALUE strings into a dict."""
+    headers: dict[str, str] = {}
+    for item in items:
+        key, _, value = item.partition("=")
+        headers[key.strip()] = value.strip()
+    return headers

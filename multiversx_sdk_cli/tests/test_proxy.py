@@ -1,4 +1,4 @@
-from multiversx_sdk import Address, ProxyNetworkProvider
+from multiversx_sdk import Address, NetworkProviderConfig, ProxyNetworkProvider
 
 from multiversx_sdk_cli.cli import main
 from multiversx_sdk_cli.config import get_config_for_network_providers
@@ -25,3 +25,22 @@ def test_query_contract():
         ]
     )
     assert False if result else True
+
+
+def test_proxy_extra_headers():
+    from unittest.mock import MagicMock, patch
+
+    config = NetworkProviderConfig(requests_options={"headers": {"x-custom-header": "test"}})
+    proxy = ProxyNetworkProvider("", config=config)
+
+    def echo_headers(url, **kwargs):
+        received_headers = kwargs.get("headers", {})
+        mock_resp = MagicMock()
+        mock_resp.status_code = 200
+        mock_resp.json.return_value = {"data": {"headers": received_headers}, "error": "", "code": "successful"}
+        return mock_resp
+
+    with patch("requests.Session.get", side_effect=echo_headers):
+        response = proxy.do_get_generic("headers")
+        headers = response.get("headers", {})
+        assert headers["x-custom-header"] == "test"

@@ -6,6 +6,7 @@ from multiversx_sdk import NetworkProviderError as SDKNetworkProviderError
 from multiversx_sdk import ProxyNetworkProvider, Token, TokenComputer
 
 from multiversx_sdk_cli import cli_shared
+from multiversx_sdk_cli.cli_shared import add_proxy_arg
 from multiversx_sdk_cli.config import get_config_for_network_providers
 from multiversx_sdk_cli.config_env import MxpyEnv
 from multiversx_sdk_cli.errors import (
@@ -25,7 +26,7 @@ def setup_parser(subparsers: Any) -> Any:
     sub = cli_shared.add_command_subparser(subparsers, "get", "account", "Get info about an account.")
     _add_alias_arg(sub)
     _add_address_arg(sub)
-    _add_proxy_arg(sub)
+    add_proxy_arg(sub)
     sub.add_argument(
         "--balance",
         action="store_true",
@@ -40,7 +41,7 @@ def setup_parser(subparsers: Any) -> Any:
     )
     _add_alias_arg(sub)
     _add_address_arg(sub)
-    _add_proxy_arg(sub)
+    add_proxy_arg(sub)
     sub.set_defaults(func=get_storage)
 
     sub = cli_shared.add_command_subparser(
@@ -48,14 +49,14 @@ def setup_parser(subparsers: Any) -> Any:
     )
     _add_alias_arg(sub)
     _add_address_arg(sub)
-    _add_proxy_arg(sub)
+    add_proxy_arg(sub)
     sub.add_argument("--key", type=str, required=True, help="the storage key to read from")
     sub.set_defaults(func=get_key)
 
     sub = cli_shared.add_command_subparser(subparsers, "get", "token", "Get a token of an account.")
     _add_alias_arg(sub)
     _add_address_arg(sub)
-    _add_proxy_arg(sub)
+    add_proxy_arg(sub)
     sub.add_argument(
         "--identifier",
         type=str,
@@ -65,16 +66,16 @@ def setup_parser(subparsers: Any) -> Any:
     sub.set_defaults(func=get_token)
 
     sub = cli_shared.add_command_subparser(subparsers, "get", "transaction", "Get a transaction from the network.")
-    _add_proxy_arg(sub)
+    add_proxy_arg(sub)
     sub.add_argument("--hash", type=str, required=True, help="the transaction hash")
     sub.set_defaults(func=get_transaction)
 
     sub = cli_shared.add_command_subparser(subparsers, "get", "network-config", "Get the network configuration.")
-    _add_proxy_arg(sub)
+    add_proxy_arg(sub)
     sub.set_defaults(func=get_network_config)
 
     sub = cli_shared.add_command_subparser(subparsers, "get", "network-status", "Get the network status.")
-    _add_proxy_arg(sub)
+    add_proxy_arg(sub)
     sub.add_argument(
         "--shard",
         type=int,
@@ -94,10 +95,6 @@ def _add_alias_arg(sub: Any):
 
 def _add_address_arg(sub: Any):
     sub.add_argument("--address", type=str, help="the bech32 address")
-
-
-def _add_proxy_arg(sub: Any):
-    sub.add_argument("--proxy", type=str, help="the proxy url")
 
 
 def get_account(args: Any):

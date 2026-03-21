@@ -11,7 +11,7 @@ from multiversx_sdk_cli.errors import (
     InvalidEnvironmentValue,
     UnknownEnvironmentError,
 )
-from multiversx_sdk_cli.utils import read_json_file, write_json_file
+from multiversx_sdk_cli.utils import parse_headers_list, read_json_file, write_json_file
 
 LOCAL_ENV_PATH = Path("env.mxpy.json").resolve()
 GLOBAL_ENV_PATH = SDK_PATH / "env.mxpy.json"
@@ -21,6 +21,7 @@ GLOBAL_ENV_PATH = SDK_PATH / "env.mxpy.json"
 class MxpyEnv:
     address_hrp: str
     proxy_url: str
+    proxy_headers: dict[str, str]
     explorer_url: str
     ask_confirmation: bool
 
@@ -30,6 +31,7 @@ class MxpyEnv:
         return cls(
             address_hrp=get_address_hrp(),
             proxy_url=get_proxy_url(),
+            proxy_headers=get_proxy_headers(),
             explorer_url=get_explorer_url(),
             ask_confirmation=get_confirmation_setting(),
         )
@@ -39,6 +41,7 @@ def get_defaults() -> dict[str, str]:
     return {
         "default_address_hrp": "erd",
         "proxy_url": "",
+        "proxy_headers": "",
         "explorer_url": "",
         "ask_confirmation": "false",
     }
@@ -70,6 +73,16 @@ def get_proxy_url() -> str:
     If not set, it returns an empty string.
     """
     return _get_env_value("proxy_url")
+
+
+@cache
+def get_proxy_headers() -> dict[str, str]:
+    """
+    Returns the proxy headers for the active environment as a dict.
+    Headers are stored as space-separated KEY=VALUE pairs (e.g. 'X-Api-Key=abc Authorization=Bearer token').
+    """
+    raw = _get_env_value("proxy_headers")
+    return parse_headers_list(raw.split()) if raw else {}
 
 
 @cache

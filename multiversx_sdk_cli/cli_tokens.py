@@ -7,7 +7,7 @@ from multiversx_sdk import (
     TokenType,
 )
 
-from multiversx_sdk_cli import cli_shared
+from multiversx_sdk_cli import cli_shared, config
 from multiversx_sdk_cli.args_validation import (
     validate_broadcast_args,
     validate_chain_id_args,
@@ -828,7 +828,7 @@ def _initialize_controller(args: Any) -> TokenManagementController:
     proxy_url = args.proxy if args.proxy else ""
     return TokenManagementController(
         chain_id=chain_id,
-        network_provider=ProxyNetworkProvider(proxy_url),
+        network_provider=ProxyNetworkProvider(proxy_url, config=config.get_config_for_network_providers()),
         gas_limit_estimator=gas_estimator,
     )
 

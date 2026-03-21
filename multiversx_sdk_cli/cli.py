@@ -30,7 +30,7 @@ import multiversx_sdk_cli.cli_validators
 import multiversx_sdk_cli.cli_wallet
 import multiversx_sdk_cli.version
 from multiversx_sdk_cli import config, errors, utils, ux
-from multiversx_sdk_cli.cli_shared import set_proxy_from_config_if_not_provided
+from multiversx_sdk_cli.cli_shared import parse_proxy_headers, set_proxy_from_config_if_not_provided
 from multiversx_sdk_cli.config_env import get_address_hrp
 from multiversx_sdk_cli.constants import LOG_LEVELS, SDK_PATH
 
@@ -81,6 +81,7 @@ def _do_main(cli_args: list[str]):
         parser.print_help()
     else:
         set_proxy_from_config_if_not_provided(args)
+        config.set_proxy_headers(parse_proxy_headers(getattr(args, "proxy_headers", None)))
         args.func(args)
 
 

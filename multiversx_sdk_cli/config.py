@@ -1,7 +1,7 @@
 import os
 from functools import cache
 from pathlib import Path
-from typing import Any
+from typing import Any, Optional
 
 from multiversx_sdk import NetworkProviderConfig
 
@@ -192,5 +192,14 @@ def get_dependency_parent_directory(key: str) -> Path:
     return SDK_PATH / key
 
 
+_proxy_headers: dict[str, str] = {}
+
+
+def set_proxy_headers(headers: dict[str, str]) -> None:
+    global _proxy_headers
+    _proxy_headers = headers
+
+
 def get_config_for_network_providers() -> NetworkProviderConfig:
-    return NetworkProviderConfig(client_name="mxpy")
+    requests_options: Optional[dict[str, Any]] = {"headers": _proxy_headers} if _proxy_headers else None
+    return NetworkProviderConfig(client_name="mxpy", requests_options=requests_options)

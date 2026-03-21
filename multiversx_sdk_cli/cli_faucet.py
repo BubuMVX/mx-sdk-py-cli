@@ -29,6 +29,12 @@ def setup_parser(args: list[str], subparsers: Any) -> Any:
     cli_shared.add_wallet_args(args, sub)
     sub.add_argument("--chain", choices=["D", "T"], help="the chain identifier")
     sub.add_argument("--api", type=str, help="custom api url for the native auth client")
+    sub.add_argument(
+        "--api-headers",
+        nargs="+",
+        metavar="KEY=VALUE",
+        help="extra HTTP headers for API requests, e.g. 'Api-Key=mytoken'"
+    )
     sub.add_argument("--wallet-url", type=str, help="custom wallet url to call the faucet from")
     sub.set_defaults(func=faucet)
 
@@ -40,7 +46,8 @@ def faucet(args: Any):
     account = cli_shared.prepare_account(args)
     wallet, api = get_wallet_and_api_urls(args)
 
-    config = NativeAuthClientConfig(origin=wallet, api_url=api)
+    extra_headers = cli_shared.parse_proxy_headers(getattr(args, "api_headers", None))
+    config = NativeAuthClientConfig(origin=wallet, api_url=api, extra_request_headers=extra_headers or None)
     client = NativeAuthClient(config)
 
     init_token = client.initialize()

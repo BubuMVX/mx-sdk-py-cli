@@ -20,7 +20,7 @@ mxpy targets a broad audience of users and developers.
 See:
  - https://docs.multiversx.com/sdk-and-tools/sdk-py
  - https://docs.multiversx.com/sdk-and-tools/sdk-py/mxpy-cli
-
+        
 
 COMMAND GROUPS:
   {config-wallet,contract,tx,validator,ledger,wallet,validator-wallet,deps,config,localnet,data,staking-provider,dns,faucet,multisig,governance,config-env,get,token}
@@ -141,6 +141,7 @@ options:
   --sender-username SENDER_USERNAME              🖄 the username of the sender
   --hrp HRP                                      The hrp used to convert the address to its bech32 representation
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --nonce NONCE                                  # the nonce for the transaction. If not provided, is fetched from the
                                                  network.
   --gas-price GAS_PRICE                          ⛽ the gas price (default: 1000000000)
@@ -236,6 +237,7 @@ options:
   --sender-username SENDER_USERNAME               🖄 the username of the sender
   --hrp HRP                                       The hrp used to convert the address to its bech32 representation
   --proxy PROXY                                   🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]       custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --nonce NONCE                                   # the nonce for the transaction. If not provided, is fetched from the
                                                   network.
   --gas-price GAS_PRICE                           ⛽ the gas price (default: 1000000000)
@@ -341,6 +343,7 @@ options:
   --sender-username SENDER_USERNAME              🖄 the username of the sender
   --hrp HRP                                      The hrp used to convert the address to its bech32 representation
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --nonce NONCE                                  # the nonce for the transaction. If not provided, is fetched from the
                                                  network.
   --gas-price GAS_PRICE                          ⛽ the gas price (default: 1000000000)
@@ -391,18 +394,19 @@ usage: mxpy contract query [-h] ...
 Query a Smart Contract (call a pure function)
 
 positional arguments:
-  contract                               🖄 the bech32 address of the Smart Contract
+  contract                                   🖄 the bech32 address of the Smart Contract
 
 options:
-  -h, --help                             show this help message and exit
-  --abi ABI                              the ABI file of the Smart Contract
-  --proxy PROXY                          🔗 the URL of the proxy
-  --function FUNCTION                    the function to call
-  --arguments ARGUMENTS [ARGUMENTS ...]  arguments for the contract transaction, as [number, bech32-address, ascii
-                                         string, boolean] or hex-encoded. E.g. --arguments 42 0x64 1000 0xabba
-                                         str:TOK-a1c2ef true addr:erd1[..]
-  --arguments-file ARGUMENTS_FILE        a json file containing the arguments. ONLY if abi file is provided. E.g. [{
-                                         'to': 'erd1...', 'amount': 10000000000 }]
+  -h, --help                                 show this help message and exit
+  --abi ABI                                  the ABI file of the Smart Contract
+  --proxy PROXY                              🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]  custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
+  --function FUNCTION                        the function to call
+  --arguments ARGUMENTS [ARGUMENTS ...]      arguments for the contract transaction, as [number, bech32-address, ascii
+                                             string, boolean] or hex-encoded. E.g. --arguments 42 0x64 1000 0xabba
+                                             str:TOK-a1c2ef true addr:erd1[..]
+  --arguments-file ARGUMENTS_FILE            a json file containing the arguments. ONLY if abi file is provided. E.g. [{
+                                             'to': 'erd1...', 'amount': 10000000000 }]
 
 ```
 ### Contract.Verify
@@ -575,6 +579,7 @@ options:
   --send                                          ✓ whether to broadcast the transaction (default: False)
   --simulate                                      whether to simulate the transaction (default: False)
   --proxy PROXY                                   🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]       custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --guardian-service-url GUARDIAN_SERVICE_URL     the url of the guardian service
   --guardian-2fa-code GUARDIAN_2FA_CODE           the 2fa code for the guardian
   --guardian-pem GUARDIAN_PEM                     🔑 the PEM file, if keyfile not provided
@@ -620,10 +625,11 @@ Output example:
 }
 
 options:
-  -h, --help         show this help message and exit
-  --infile INFILE    input file (a previously saved transaction)
-  --outfile OUTFILE  where to save the output (the hash) (default: stdout)
-  --proxy PROXY      🔗 the URL of the proxy
+  -h, --help                                 show this help message and exit
+  --infile INFILE                            input file (a previously saved transaction)
+  --outfile OUTFILE                          where to save the output (the hash) (default: stdout)
+  --proxy PROXY                              🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]  custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
 
 ```
 ### Transactions.Sign
@@ -665,6 +671,7 @@ options:
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --guardian-service-url GUARDIAN_SERVICE_URL    the url of the guardian service
   --guardian-2fa-code GUARDIAN_2FA_CODE          the 2fa code for the guardian
   --guardian-pem GUARDIAN_PEM                    🔑 the PEM file, if keyfile not provided
@@ -720,6 +727,7 @@ options:
   --send                                       ✓ whether to broadcast the transaction (default: False)
   --simulate                                   whether to simulate the transaction (default: False)
   --proxy PROXY                                🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]    custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
 
 ```
 ## Group **Validator**
@@ -766,6 +774,7 @@ Stake value into the Network
 options:
   -h, --help                                     show this help message and exit
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --sender SENDER                                the alias of the wallet set in the address config
   --pem PEM                                      🔑 the PEM file, if keyfile not provided
   --keyfile KEYFILE                              🔑 a JSON keyfile, if PEM not provided
@@ -824,6 +833,7 @@ Unstake value
 options:
   -h, --help                                     show this help message and exit
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --sender SENDER                                the alias of the wallet set in the address config
   --pem PEM                                      🔑 the PEM file, if keyfile not provided
   --keyfile KEYFILE                              🔑 a JSON keyfile, if PEM not provided
@@ -880,6 +890,7 @@ Unjail a Validator Node
 options:
   -h, --help                                     show this help message and exit
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --sender SENDER                                the alias of the wallet set in the address config
   --pem PEM                                      🔑 the PEM file, if keyfile not provided
   --keyfile KEYFILE                              🔑 a JSON keyfile, if PEM not provided
@@ -936,6 +947,7 @@ Unbond tokens for a bls key
 options:
   -h, --help                                     show this help message and exit
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --sender SENDER                                the alias of the wallet set in the address config
   --pem PEM                                      🔑 the PEM file, if keyfile not provided
   --keyfile KEYFILE                              🔑 a JSON keyfile, if PEM not provided
@@ -992,6 +1004,7 @@ Change the reward address
 options:
   -h, --help                                     show this help message and exit
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --sender SENDER                                the alias of the wallet set in the address config
   --pem PEM                                      🔑 the PEM file, if keyfile not provided
   --keyfile KEYFILE                              🔑 a JSON keyfile, if PEM not provided
@@ -1048,6 +1061,7 @@ Claim rewards
 options:
   -h, --help                                     show this help message and exit
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --sender SENDER                                the alias of the wallet set in the address config
   --pem PEM                                      🔑 the PEM file, if keyfile not provided
   --keyfile KEYFILE                              🔑 a JSON keyfile, if PEM not provided
@@ -1103,6 +1117,7 @@ Unstake-nodes will unstake nodes for provided bls keys
 options:
   -h, --help                                     show this help message and exit
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --sender SENDER                                the alias of the wallet set in the address config
   --pem PEM                                      🔑 the PEM file, if keyfile not provided
   --keyfile KEYFILE                              🔑 a JSON keyfile, if PEM not provided
@@ -1159,6 +1174,7 @@ This command will un-stake the given amount (if value is greater than the existi
 options:
   -h, --help                                     show this help message and exit
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --sender SENDER                                the alias of the wallet set in the address config
   --pem PEM                                      🔑 the PEM file, if keyfile not provided
   --keyfile KEYFILE                              🔑 a JSON keyfile, if PEM not provided
@@ -1215,6 +1231,7 @@ It will unBond nodes
 options:
   -h, --help                                     show this help message and exit
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --sender SENDER                                the alias of the wallet set in the address config
   --pem PEM                                      🔑 the PEM file, if keyfile not provided
   --keyfile KEYFILE                              🔑 a JSON keyfile, if PEM not provided
@@ -1271,6 +1288,7 @@ It will unBond tokens, if provided value is bigger that topUp value will unBond 
 options:
   -h, --help                                     show this help message and exit
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --sender SENDER                                the alias of the wallet set in the address config
   --pem PEM                                      🔑 the PEM file, if keyfile not provided
   --keyfile KEYFILE                              🔑 a JSON keyfile, if PEM not provided
@@ -1327,6 +1345,7 @@ Deletes duplicated keys from registered data
 options:
   -h, --help                                     show this help message and exit
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --sender SENDER                                the alias of the wallet set in the address config
   --pem PEM                                      🔑 the PEM file, if keyfile not provided
   --keyfile KEYFILE                              🔑 a JSON keyfile, if PEM not provided
@@ -1382,6 +1401,7 @@ It will reStake UnStaked nodes
 options:
   -h, --help                                     show this help message and exit
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --sender SENDER                                the alias of the wallet set in the address config
   --pem PEM                                      🔑 the PEM file, if keyfile not provided
   --keyfile KEYFILE                              🔑 a JSON keyfile, if PEM not provided
@@ -1477,6 +1497,7 @@ Create a new delegation system smart contract, transferred value must be greater
 options:
   -h, --help                                     show this help message and exit
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --sender SENDER                                the alias of the wallet set in the address config
   --pem PEM                                      🔑 the PEM file, if keyfile not provided
   --keyfile KEYFILE                              🔑 a JSON keyfile, if PEM not provided
@@ -1532,9 +1553,10 @@ usage: mxpy staking-provider get-contract-address [-h] ...
 Get create contract address by transaction hash
 
 options:
-  -h, --help                       show this help message and exit
-  --create-tx-hash CREATE_TX_HASH  the hash
-  --proxy PROXY                    🔗 the URL of the proxy
+  -h, --help                                 show this help message and exit
+  --create-tx-hash CREATE_TX_HASH            the hash
+  --proxy PROXY                              🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]  custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
 
 ```
 ### StakingProvider.AddNodes
@@ -1551,6 +1573,7 @@ options:
   --validators-pem VALIDATORS_PEM                a PEM file holding the BLS keys; can contain multiple nodes
   --delegation-contract DELEGATION_CONTRACT      bech32 address of the delegation contract
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --sender SENDER                                the alias of the wallet set in the address config
   --pem PEM                                      🔑 the PEM file, if keyfile not provided
   --keyfile KEYFILE                              🔑 a JSON keyfile, if PEM not provided
@@ -1609,6 +1632,7 @@ options:
   --validators-pem VALIDATORS_PEM                a PEM file holding the BLS keys; can contain multiple nodes
   --delegation-contract DELEGATION_CONTRACT      address of the delegation contract
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --sender SENDER                                the alias of the wallet set in the address config
   --pem PEM                                      🔑 the PEM file, if keyfile not provided
   --keyfile KEYFILE                              🔑 a JSON keyfile, if PEM not provided
@@ -1667,6 +1691,7 @@ options:
   --validators-pem VALIDATORS_PEM                a PEM file holding the BLS keys; can contain multiple nodes
   --delegation-contract DELEGATION_CONTRACT      bech32 address of the delegation contract
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --sender SENDER                                the alias of the wallet set in the address config
   --pem PEM                                      🔑 the PEM file, if keyfile not provided
   --keyfile KEYFILE                              🔑 a JSON keyfile, if PEM not provided
@@ -1725,6 +1750,7 @@ options:
   --validators-pem VALIDATORS_PEM                a PEM file holding the BLS keys; can contain multiple nodes
   --delegation-contract DELEGATION_CONTRACT      address of the delegation contract
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --sender SENDER                                the alias of the wallet set in the address config
   --pem PEM                                      🔑 the PEM file, if keyfile not provided
   --keyfile KEYFILE                              🔑 a JSON keyfile, if PEM not provided
@@ -1783,6 +1809,7 @@ options:
   --validators-pem VALIDATORS_PEM                a PEM file holding the BLS keys; can contain multiple nodes
   --delegation-contract DELEGATION_CONTRACT      address of the delegation contract
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --sender SENDER                                the alias of the wallet set in the address config
   --pem PEM                                      🔑 the PEM file, if keyfile not provided
   --keyfile KEYFILE                              🔑 a JSON keyfile, if PEM not provided
@@ -1841,6 +1868,7 @@ options:
   --validators-pem VALIDATORS_PEM                a PEM file holding the BLS keys; can contain multiple nodes
   --delegation-contract DELEGATION_CONTRACT      address of the delegation contract
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --sender SENDER                                the alias of the wallet set in the address config
   --pem PEM                                      🔑 the PEM file, if keyfile not provided
   --keyfile KEYFILE                              🔑 a JSON keyfile, if PEM not provided
@@ -1897,6 +1925,7 @@ options:
   -h, --help                                     show this help message and exit
   --delegation-contract DELEGATION_CONTRACT      address of the delegation contract
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --sender SENDER                                the alias of the wallet set in the address config
   --pem PEM                                      🔑 the PEM file, if keyfile not provided
   --keyfile KEYFILE                              🔑 a JSON keyfile, if PEM not provided
@@ -1953,6 +1982,7 @@ options:
   -h, --help                                     show this help message and exit
   --delegation-contract DELEGATION_CONTRACT      address of the delegation contract
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --sender SENDER                                the alias of the wallet set in the address config
   --pem PEM                                      🔑 the PEM file, if keyfile not provided
   --keyfile KEYFILE                              🔑 a JSON keyfile, if PEM not provided
@@ -2009,6 +2039,7 @@ options:
   -h, --help                                     show this help message and exit
   --delegation-contract DELEGATION_CONTRACT      address of the delegation contract
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --sender SENDER                                the alias of the wallet set in the address config
   --pem PEM                                      🔑 the PEM file, if keyfile not provided
   --keyfile KEYFILE                              🔑 a JSON keyfile, if PEM not provided
@@ -2065,6 +2096,7 @@ options:
   -h, --help                                     show this help message and exit
   --delegation-contract DELEGATION_CONTRACT      address of the delegation contract
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --sender SENDER                                the alias of the wallet set in the address config
   --pem PEM                                      🔑 the PEM file, if keyfile not provided
   --keyfile KEYFILE                              🔑 a JSON keyfile, if PEM not provided
@@ -2121,6 +2153,7 @@ options:
   -h, --help                                     show this help message and exit
   --delegation-contract DELEGATION_CONTRACT      address of the delegation contract
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --sender SENDER                                the alias of the wallet set in the address config
   --pem PEM                                      🔑 the PEM file, if keyfile not provided
   --keyfile KEYFILE                              🔑 a JSON keyfile, if PEM not provided
@@ -2178,6 +2211,7 @@ options:
   --service-fee SERVICE_FEE                      new service fee value
   --delegation-contract DELEGATION_CONTRACT      address of the delegation contract
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --sender SENDER                                the alias of the wallet set in the address config
   --pem PEM                                      🔑 the PEM file, if keyfile not provided
   --keyfile KEYFILE                              🔑 a JSON keyfile, if PEM not provided
@@ -2235,6 +2269,7 @@ options:
   --delegation-cap DELEGATION_CAP                new delegation contract capacity
   --delegation-contract DELEGATION_CONTRACT      address of the delegation contract
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --sender SENDER                                the alias of the wallet set in the address config
   --pem PEM                                      🔑 the PEM file, if keyfile not provided
   --keyfile KEYFILE                              🔑 a JSON keyfile, if PEM not provided
@@ -2293,6 +2328,7 @@ options:
   --unset                                        set automatic activation False
   --delegation-contract DELEGATION_CONTRACT      address of the delegation contract
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --sender SENDER                                the alias of the wallet set in the address config
   --pem PEM                                      🔑 the PEM file, if keyfile not provided
   --keyfile KEYFILE                              🔑 a JSON keyfile, if PEM not provided
@@ -2351,6 +2387,7 @@ options:
   --unset                                        set redelegate cap False
   --delegation-contract DELEGATION_CONTRACT      address of the delegation contract
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --sender SENDER                                the alias of the wallet set in the address config
   --pem PEM                                      🔑 the PEM file, if keyfile not provided
   --keyfile KEYFILE                              🔑 a JSON keyfile, if PEM not provided
@@ -2410,6 +2447,7 @@ options:
   --identifier IDENTIFIER                        identifier field in staking provider metadata
   --delegation-contract DELEGATION_CONTRACT      address of the delegation contract
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --sender SENDER                                the alias of the wallet set in the address config
   --pem PEM                                      🔑 the PEM file, if keyfile not provided
   --keyfile KEYFILE                              🔑 a JSON keyfile, if PEM not provided
@@ -2469,6 +2507,7 @@ options:
   --fee FEE                                      service fee as hundredths of percents. (e.g. a service fee of 37.45
                                                  percent is expressed by the integer 3745)
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --sender SENDER                                the alias of the wallet set in the address config
   --pem PEM                                      🔑 the PEM file, if keyfile not provided
   --keyfile KEYFILE                              🔑 a JSON keyfile, if PEM not provided
@@ -3146,6 +3185,7 @@ options:
   --hrp HRP                                  The hrp used to convert the address to its bech32 representation
   --chain {D,T}                              the chain identifier
   --api API                                  custom api url for the native auth client
+  --api-headers KEY=VALUE [KEY=VALUE ...]    extra HTTP headers for API requests, e.g. 'Api-Key=mytoken'
   --wallet-url WALLET_URL                    custom wallet url to call the faucet from
 
 ```
@@ -3254,6 +3294,7 @@ options:
   --sender-username SENDER_USERNAME               🖄 the username of the sender
   --hrp HRP                                       The hrp used to convert the address to its bech32 representation
   --proxy PROXY                                   🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]       custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --nonce NONCE                                   # the nonce for the transaction. If not provided, is fetched from the
                                                   network.
   --gas-price GAS_PRICE                           ⛽ the gas price (default: 1000000000)
@@ -3331,6 +3372,7 @@ options:
   --sender-username SENDER_USERNAME               🖄 the username of the sender
   --hrp HRP                                       The hrp used to convert the address to its bech32 representation
   --proxy PROXY                                   🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]       custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --nonce NONCE                                   # the nonce for the transaction. If not provided, is fetched from the
                                                   network.
   --gas-price GAS_PRICE                           ⛽ the gas price (default: 1000000000)
@@ -3406,6 +3448,7 @@ options:
   --sender-username SENDER_USERNAME              🖄 the username of the sender
   --hrp HRP                                      The hrp used to convert the address to its bech32 representation
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --nonce NONCE                                  # the nonce for the transaction. If not provided, is fetched from the
                                                  network.
   --gas-price GAS_PRICE                          ⛽ the gas price (default: 1000000000)
@@ -3480,6 +3523,7 @@ options:
   --sender-username SENDER_USERNAME              🖄 the username of the sender
   --hrp HRP                                      The hrp used to convert the address to its bech32 representation
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --nonce NONCE                                  # the nonce for the transaction. If not provided, is fetched from the
                                                  network.
   --gas-price GAS_PRICE                          ⛽ the gas price (default: 1000000000)
@@ -3554,6 +3598,7 @@ options:
   --sender-username SENDER_USERNAME              🖄 the username of the sender
   --hrp HRP                                      The hrp used to convert the address to its bech32 representation
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --nonce NONCE                                  # the nonce for the transaction. If not provided, is fetched from the
                                                  network.
   --gas-price GAS_PRICE                          ⛽ the gas price (default: 1000000000)
@@ -3628,6 +3673,7 @@ options:
   --sender-username SENDER_USERNAME              🖄 the username of the sender
   --hrp HRP                                      The hrp used to convert the address to its bech32 representation
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --nonce NONCE                                  # the nonce for the transaction. If not provided, is fetched from the
                                                  network.
   --gas-price GAS_PRICE                          ⛽ the gas price (default: 1000000000)
@@ -3702,6 +3748,7 @@ options:
   --sender-username SENDER_USERNAME              🖄 the username of the sender
   --hrp HRP                                      The hrp used to convert the address to its bech32 representation
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --nonce NONCE                                  # the nonce for the transaction. If not provided, is fetched from the
                                                  network.
   --gas-price GAS_PRICE                          ⛽ the gas price (default: 1000000000)
@@ -3777,6 +3824,7 @@ options:
   --sender-username SENDER_USERNAME              🖄 the username of the sender
   --hrp HRP                                      The hrp used to convert the address to its bech32 representation
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --nonce NONCE                                  # the nonce for the transaction. If not provided, is fetched from the
                                                  network.
   --gas-price GAS_PRICE                          ⛽ the gas price (default: 1000000000)
@@ -3858,6 +3906,7 @@ options:
   --sender-username SENDER_USERNAME              🖄 the username of the sender
   --hrp HRP                                      The hrp used to convert the address to its bech32 representation
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --nonce NONCE                                  # the nonce for the transaction. If not provided, is fetched from the
                                                  network.
   --receiver RECEIVER                            🖄 the address of the receiver
@@ -3944,6 +3993,7 @@ options:
   --sender-username SENDER_USERNAME               🖄 the username of the sender
   --hrp HRP                                       The hrp used to convert the address to its bech32 representation
   --proxy PROXY                                   🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]       custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --nonce NONCE                                   # the nonce for the transaction. If not provided, is fetched from the
                                                   network.
   --receiver RECEIVER                             🖄 the address of the receiver
@@ -4031,6 +4081,7 @@ options:
   --sender-username SENDER_USERNAME               🖄 the username of the sender
   --hrp HRP                                       The hrp used to convert the address to its bech32 representation
   --proxy PROXY                                   🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]       custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --nonce NONCE                                   # the nonce for the transaction. If not provided, is fetched from the
                                                   network.
   --receiver RECEIVER                             🖄 the address of the receiver
@@ -4118,6 +4169,7 @@ options:
   --sender-username SENDER_USERNAME              🖄 the username of the sender
   --hrp HRP                                      The hrp used to convert the address to its bech32 representation
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --nonce NONCE                                  # the nonce for the transaction. If not provided, is fetched from the
                                                  network.
   --gas-price GAS_PRICE                          ⛽ the gas price (default: 1000000000)
@@ -4203,6 +4255,7 @@ options:
   --sender-username SENDER_USERNAME              🖄 the username of the sender
   --hrp HRP                                      The hrp used to convert the address to its bech32 representation
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --nonce NONCE                                  # the nonce for the transaction. If not provided, is fetched from the
                                                  network.
   --gas-price GAS_PRICE                          ⛽ the gas price (default: 1000000000)
@@ -4277,6 +4330,7 @@ options:
   --sender-username SENDER_USERNAME              🖄 the username of the sender
   --hrp HRP                                      The hrp used to convert the address to its bech32 representation
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --nonce NONCE                                  # the nonce for the transaction. If not provided, is fetched from the
                                                  network.
   --gas-price GAS_PRICE                          ⛽ the gas price (default: 1000000000)
@@ -4351,6 +4405,7 @@ options:
   --sender-username SENDER_USERNAME              🖄 the username of the sender
   --hrp HRP                                      The hrp used to convert the address to its bech32 representation
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --nonce NONCE                                  # the nonce for the transaction. If not provided, is fetched from the
                                                  network.
   --gas-price GAS_PRICE                          ⛽ the gas price (default: 1000000000)
@@ -4425,6 +4480,7 @@ options:
   --sender-username SENDER_USERNAME              🖄 the username of the sender
   --hrp HRP                                      The hrp used to convert the address to its bech32 representation
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --nonce NONCE                                  # the nonce for the transaction. If not provided, is fetched from the
                                                  network.
   --gas-price GAS_PRICE                          ⛽ the gas price (default: 1000000000)
@@ -4499,6 +4555,7 @@ options:
   --sender-username SENDER_USERNAME              🖄 the username of the sender
   --hrp HRP                                      The hrp used to convert the address to its bech32 representation
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --nonce NONCE                                  # the nonce for the transaction. If not provided, is fetched from the
                                                  network.
   --gas-price GAS_PRICE                          ⛽ the gas price (default: 1000000000)
@@ -4573,6 +4630,7 @@ options:
   --sender-username SENDER_USERNAME              🖄 the username of the sender
   --hrp HRP                                      The hrp used to convert the address to its bech32 representation
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --nonce NONCE                                  # the nonce for the transaction. If not provided, is fetched from the
                                                  network.
   --gas-price GAS_PRICE                          ⛽ the gas price (default: 1000000000)
@@ -4647,6 +4705,7 @@ options:
   --sender-username SENDER_USERNAME              🖄 the username of the sender
   --hrp HRP                                      The hrp used to convert the address to its bech32 representation
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --nonce NONCE                                  # the nonce for the transaction. If not provided, is fetched from the
                                                  network.
   --gas-price GAS_PRICE                          ⛽ the gas price (default: 1000000000)
@@ -4723,6 +4782,7 @@ options:
   --sender-username SENDER_USERNAME               🖄 the username of the sender
   --hrp HRP                                       The hrp used to convert the address to its bech32 representation
   --proxy PROXY                                   🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]       custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --nonce NONCE                                   # the nonce for the transaction. If not provided, is fetched from the
                                                   network.
   --gas-price GAS_PRICE                           ⛽ the gas price (default: 1000000000)
@@ -4798,6 +4858,7 @@ options:
   --sender-username SENDER_USERNAME              🖄 the username of the sender
   --hrp HRP                                      The hrp used to convert the address to its bech32 representation
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --nonce NONCE                                  # the nonce for the transaction. If not provided, is fetched from the
                                                  network.
   --gas-price GAS_PRICE                          ⛽ the gas price (default: 1000000000)
@@ -4872,6 +4933,7 @@ options:
   --sender-username SENDER_USERNAME              🖄 the username of the sender
   --hrp HRP                                      The hrp used to convert the address to its bech32 representation
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --nonce NONCE                                  # the nonce for the transaction. If not provided, is fetched from the
                                                  network.
   --gas-price GAS_PRICE                          ⛽ the gas price (default: 1000000000)
@@ -4917,10 +4979,11 @@ usage: mxpy multisig get-quorum [-h] ...
 Perform a smart contract query to get the quorum.
 
 options:
-  -h, --help           show this help message and exit
-  --contract CONTRACT  🖄 the bech32 address of the Multisig Smart Contract
-  --abi ABI            the ABI file of the Multisig Smart Contract
-  --proxy PROXY        🔗 the URL of the proxy
+  -h, --help                                 show this help message and exit
+  --contract CONTRACT                        🖄 the bech32 address of the Multisig Smart Contract
+  --abi ABI                                  the ABI file of the Multisig Smart Contract
+  --proxy PROXY                              🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]  custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
 
 ```
 ### Multisig.GetNumBoardMembers
@@ -4933,10 +4996,11 @@ usage: mxpy multisig get-num-board-members [-h] ...
 Perform a smart contract query to get the number of board members.
 
 options:
-  -h, --help           show this help message and exit
-  --contract CONTRACT  🖄 the bech32 address of the Multisig Smart Contract
-  --abi ABI            the ABI file of the Multisig Smart Contract
-  --proxy PROXY        🔗 the URL of the proxy
+  -h, --help                                 show this help message and exit
+  --contract CONTRACT                        🖄 the bech32 address of the Multisig Smart Contract
+  --abi ABI                                  the ABI file of the Multisig Smart Contract
+  --proxy PROXY                              🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]  custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
 
 ```
 ### Multisig.GetNumGroups
@@ -4949,10 +5013,11 @@ usage: mxpy multisig get-num-groups [-h] ...
 Perform a smart contract query to get the number of groups.
 
 options:
-  -h, --help           show this help message and exit
-  --contract CONTRACT  🖄 the bech32 address of the Multisig Smart Contract
-  --abi ABI            the ABI file of the Multisig Smart Contract
-  --proxy PROXY        🔗 the URL of the proxy
+  -h, --help                                 show this help message and exit
+  --contract CONTRACT                        🖄 the bech32 address of the Multisig Smart Contract
+  --abi ABI                                  the ABI file of the Multisig Smart Contract
+  --proxy PROXY                              🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]  custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
 
 ```
 ### Multisig.GetNumProposers
@@ -4965,10 +5030,11 @@ usage: mxpy multisig get-num-proposers [-h] ...
 Perform a smart contract query to get the number of proposers.
 
 options:
-  -h, --help           show this help message and exit
-  --contract CONTRACT  🖄 the bech32 address of the Multisig Smart Contract
-  --abi ABI            the ABI file of the Multisig Smart Contract
-  --proxy PROXY        🔗 the URL of the proxy
+  -h, --help                                 show this help message and exit
+  --contract CONTRACT                        🖄 the bech32 address of the Multisig Smart Contract
+  --abi ABI                                  the ABI file of the Multisig Smart Contract
+  --proxy PROXY                              🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]  custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
 
 ```
 ### Multisig.GetActionGroup
@@ -4981,11 +5047,12 @@ usage: mxpy multisig get-action-group [-h] ...
 Perform a smart contract query to get the actions in a group.
 
 options:
-  -h, --help           show this help message and exit
-  --contract CONTRACT  🖄 the bech32 address of the Multisig Smart Contract
-  --abi ABI            the ABI file of the Multisig Smart Contract
-  --group GROUP        the group id
-  --proxy PROXY        🔗 the URL of the proxy
+  -h, --help                                 show this help message and exit
+  --contract CONTRACT                        🖄 the bech32 address of the Multisig Smart Contract
+  --abi ABI                                  the ABI file of the Multisig Smart Contract
+  --group GROUP                              the group id
+  --proxy PROXY                              🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]  custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
 
 ```
 ### Multisig.GetLastActionGroupId
@@ -4998,10 +5065,11 @@ usage: mxpy multisig get-last-action-group-id [-h] ...
 Perform a smart contract query to get the id of the last action in a group.
 
 options:
-  -h, --help           show this help message and exit
-  --contract CONTRACT  🖄 the bech32 address of the Multisig Smart Contract
-  --abi ABI            the ABI file of the Multisig Smart Contract
-  --proxy PROXY        🔗 the URL of the proxy
+  -h, --help                                 show this help message and exit
+  --contract CONTRACT                        🖄 the bech32 address of the Multisig Smart Contract
+  --abi ABI                                  the ABI file of the Multisig Smart Contract
+  --proxy PROXY                              🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]  custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
 
 ```
 ### Multisig.GetLastActionLastIndex
@@ -5014,10 +5082,11 @@ usage: mxpy multisig get-action-last-index [-h] ...
 Perform a smart contract query to get the index of the last action.
 
 options:
-  -h, --help           show this help message and exit
-  --contract CONTRACT  🖄 the bech32 address of the Multisig Smart Contract
-  --abi ABI            the ABI file of the Multisig Smart Contract
-  --proxy PROXY        🔗 the URL of the proxy
+  -h, --help                                 show this help message and exit
+  --contract CONTRACT                        🖄 the bech32 address of the Multisig Smart Contract
+  --abi ABI                                  the ABI file of the Multisig Smart Contract
+  --proxy PROXY                              🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]  custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
 
 ```
 ### Multisig.IsSignedBy
@@ -5030,12 +5099,13 @@ usage: mxpy multisig is-signed-by [-h] ...
 Perform a smart contract query to check if an action is signed by a user.
 
 options:
-  -h, --help           show this help message and exit
-  --contract CONTRACT  🖄 the bech32 address of the Multisig Smart Contract
-  --abi ABI            the ABI file of the Multisig Smart Contract
-  --action ACTION      the id of the action
-  --user USER          the bech32 address of the user
-  --proxy PROXY        🔗 the URL of the proxy
+  -h, --help                                 show this help message and exit
+  --contract CONTRACT                        🖄 the bech32 address of the Multisig Smart Contract
+  --abi ABI                                  the ABI file of the Multisig Smart Contract
+  --action ACTION                            the id of the action
+  --user USER                                the bech32 address of the user
+  --proxy PROXY                              🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]  custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
 
 ```
 ### Multisig.IsQuorumReached
@@ -5048,11 +5118,12 @@ usage: mxpy multisig is-quorum-reached [-h] ...
 Perform a smart contract query to check if an action has reached quorum.
 
 options:
-  -h, --help           show this help message and exit
-  --contract CONTRACT  🖄 the bech32 address of the Multisig Smart Contract
-  --abi ABI            the ABI file of the Multisig Smart Contract
-  --action ACTION      the id of the action
-  --proxy PROXY        🔗 the URL of the proxy
+  -h, --help                                 show this help message and exit
+  --contract CONTRACT                        🖄 the bech32 address of the Multisig Smart Contract
+  --abi ABI                                  the ABI file of the Multisig Smart Contract
+  --action ACTION                            the id of the action
+  --proxy PROXY                              🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]  custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
 
 ```
 ### Multisig.GetPendingActions
@@ -5065,10 +5136,11 @@ usage: mxpy multisig get-pending-actions [-h] ...
 Perform a smart contract query to get the pending actions full info.
 
 options:
-  -h, --help           show this help message and exit
-  --contract CONTRACT  🖄 the bech32 address of the Multisig Smart Contract
-  --abi ABI            the ABI file of the Multisig Smart Contract
-  --proxy PROXY        🔗 the URL of the proxy
+  -h, --help                                 show this help message and exit
+  --contract CONTRACT                        🖄 the bech32 address of the Multisig Smart Contract
+  --abi ABI                                  the ABI file of the Multisig Smart Contract
+  --proxy PROXY                              🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]  custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
 
 ```
 ### Multisig.GetUserRole
@@ -5081,11 +5153,12 @@ usage: mxpy multisig get-user-role [-h] ...
 Perform a smart contract query to get the role of a user.
 
 options:
-  -h, --help           show this help message and exit
-  --contract CONTRACT  🖄 the bech32 address of the Multisig Smart Contract
-  --abi ABI            the ABI file of the Multisig Smart Contract
-  --user USER          the bech32 address of the user
-  --proxy PROXY        🔗 the URL of the proxy
+  -h, --help                                 show this help message and exit
+  --contract CONTRACT                        🖄 the bech32 address of the Multisig Smart Contract
+  --abi ABI                                  the ABI file of the Multisig Smart Contract
+  --user USER                                the bech32 address of the user
+  --proxy PROXY                              🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]  custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
 
 ```
 ### Multisig.GetBoardMemebers
@@ -5098,10 +5171,11 @@ usage: mxpy multisig get-board-members [-h] ...
 Perform a smart contract query to get all the board members.
 
 options:
-  -h, --help           show this help message and exit
-  --contract CONTRACT  🖄 the bech32 address of the Multisig Smart Contract
-  --abi ABI            the ABI file of the Multisig Smart Contract
-  --proxy PROXY        🔗 the URL of the proxy
+  -h, --help                                 show this help message and exit
+  --contract CONTRACT                        🖄 the bech32 address of the Multisig Smart Contract
+  --abi ABI                                  the ABI file of the Multisig Smart Contract
+  --proxy PROXY                              🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]  custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
 
 ```
 ### Multisig.GetProposers
@@ -5114,10 +5188,11 @@ usage: mxpy multisig get-proposers [-h] ...
 Perform a smart contract query to get all the proposers.
 
 options:
-  -h, --help           show this help message and exit
-  --contract CONTRACT  🖄 the bech32 address of the Multisig Smart Contract
-  --abi ABI            the ABI file of the Multisig Smart Contract
-  --proxy PROXY        🔗 the URL of the proxy
+  -h, --help                                 show this help message and exit
+  --contract CONTRACT                        🖄 the bech32 address of the Multisig Smart Contract
+  --abi ABI                                  the ABI file of the Multisig Smart Contract
+  --proxy PROXY                              🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]  custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
 
 ```
 ### Multisig.GetActionData
@@ -5130,11 +5205,12 @@ usage: mxpy multisig get-action-data [-h] ...
 Perform a smart contract query to get the data of an action.
 
 options:
-  -h, --help           show this help message and exit
-  --contract CONTRACT  🖄 the bech32 address of the Multisig Smart Contract
-  --abi ABI            the ABI file of the Multisig Smart Contract
-  --action ACTION      the id of the action
-  --proxy PROXY        🔗 the URL of the proxy
+  -h, --help                                 show this help message and exit
+  --contract CONTRACT                        🖄 the bech32 address of the Multisig Smart Contract
+  --abi ABI                                  the ABI file of the Multisig Smart Contract
+  --action ACTION                            the id of the action
+  --proxy PROXY                              🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]  custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
 
 ```
 ### Multisig.GetActionSigners
@@ -5147,11 +5223,12 @@ usage: mxpy multisig get-action-signers [-h] ...
 Perform a smart contract query to get the signers of an action.
 
 options:
-  -h, --help           show this help message and exit
-  --contract CONTRACT  🖄 the bech32 address of the Multisig Smart Contract
-  --abi ABI            the ABI file of the Multisig Smart Contract
-  --action ACTION      the id of the action
-  --proxy PROXY        🔗 the URL of the proxy
+  -h, --help                                 show this help message and exit
+  --contract CONTRACT                        🖄 the bech32 address of the Multisig Smart Contract
+  --abi ABI                                  the ABI file of the Multisig Smart Contract
+  --action ACTION                            the id of the action
+  --proxy PROXY                              🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]  custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
 
 ```
 ### Multisig.GetActionSignersCount
@@ -5164,11 +5241,12 @@ usage: mxpy multisig get-action-signers-count [-h] ...
 Perform a smart contract query to get the number of signers of an action.
 
 options:
-  -h, --help           show this help message and exit
-  --contract CONTRACT  🖄 the bech32 address of the Multisig Smart Contract
-  --abi ABI            the ABI file of the Multisig Smart Contract
-  --action ACTION      the id of the action
-  --proxy PROXY        🔗 the URL of the proxy
+  -h, --help                                 show this help message and exit
+  --contract CONTRACT                        🖄 the bech32 address of the Multisig Smart Contract
+  --abi ABI                                  the ABI file of the Multisig Smart Contract
+  --action ACTION                            the id of the action
+  --proxy PROXY                              🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]  custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
 
 ```
 ### Multisig.GetActionValidSignersCount
@@ -5181,11 +5259,12 @@ usage: mxpy multisig get-action-valid-signers-count [-h] ...
 Perform a smart contract query to get the number of valid signers of an action.
 
 options:
-  -h, --help           show this help message and exit
-  --contract CONTRACT  🖄 the bech32 address of the Multisig Smart Contract
-  --abi ABI            the ABI file of the Multisig Smart Contract
-  --action ACTION      the id of the action
-  --proxy PROXY        🔗 the URL of the proxy
+  -h, --help                                 show this help message and exit
+  --contract CONTRACT                        🖄 the bech32 address of the Multisig Smart Contract
+  --abi ABI                                  the ABI file of the Multisig Smart Contract
+  --action ACTION                            the id of the action
+  --proxy PROXY                              🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]  custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
 
 ```
 ### Multisig.ParseProposeAction
@@ -5198,10 +5277,11 @@ usage: mxpy multisig parse-propose-action [-h] ...
 Parses the propose action transaction to extract proposal ID.
 
 options:
-  -h, --help     show this help message and exit
-  --abi ABI      the ABI file of the Multisig Smart Contract
-  --hash HASH    the transaction hash of the propose action
-  --proxy PROXY  🔗 the URL of the proxy
+  -h, --help                                 show this help message and exit
+  --abi ABI                                  the ABI file of the Multisig Smart Contract
+  --hash HASH                                the transaction hash of the propose action
+  --proxy PROXY                              🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]  custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
 
 ```
 ## Group **Governance**
@@ -5272,6 +5352,7 @@ options:
   --sender-username SENDER_USERNAME              🖄 the username of the sender
   --hrp HRP                                      The hrp used to convert the address to its bech32 representation
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --nonce NONCE                                  # the nonce for the transaction. If not provided, is fetched from the
                                                  network.
   --gas-price GAS_PRICE                          ⛽ the gas price (default: 1000000000)
@@ -5345,6 +5426,7 @@ options:
   --sender-username SENDER_USERNAME              🖄 the username of the sender
   --hrp HRP                                      The hrp used to convert the address to its bech32 representation
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --nonce NONCE                                  # the nonce for the transaction. If not provided, is fetched from the
                                                  network.
   --gas-price GAS_PRICE                          ⛽ the gas price (default: 1000000000)
@@ -5417,6 +5499,7 @@ options:
   --sender-username SENDER_USERNAME              🖄 the username of the sender
   --hrp HRP                                      The hrp used to convert the address to its bech32 representation
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --nonce NONCE                                  # the nonce for the transaction. If not provided, is fetched from the
                                                  network.
   --gas-price GAS_PRICE                          ⛽ the gas price (default: 1000000000)
@@ -5490,6 +5573,7 @@ options:
   --sender-username SENDER_USERNAME              🖄 the username of the sender
   --hrp HRP                                      The hrp used to convert the address to its bech32 representation
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --nonce NONCE                                  # the nonce for the transaction. If not provided, is fetched from the
                                                  network.
   --gas-price GAS_PRICE                          ⛽ the gas price (default: 1000000000)
@@ -5561,6 +5645,7 @@ options:
   --sender-username SENDER_USERNAME              🖄 the username of the sender
   --hrp HRP                                      The hrp used to convert the address to its bech32 representation
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --nonce NONCE                                  # the nonce for the transaction. If not provided, is fetched from the
                                                  network.
   --gas-price GAS_PRICE                          ⛽ the gas price (default: 1000000000)
@@ -5637,6 +5722,7 @@ options:
   --sender-username SENDER_USERNAME              🖄 the username of the sender
   --hrp HRP                                      The hrp used to convert the address to its bech32 representation
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --nonce NONCE                                  # the nonce for the transaction. If not provided, is fetched from the
                                                  network.
   --gas-price GAS_PRICE                          ⛽ the gas price (default: 1000000000)
@@ -5696,9 +5782,10 @@ Output example:
 }
 
 options:
-  -h, --help     show this help message and exit
-  --user USER    the bech32 address of the user
-  --proxy PROXY  🔗 the URL of the proxy
+  -h, --help                                 show this help message and exit
+  --user USER                                the bech32 address of the user
+  --proxy PROXY                              🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]  custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
 
 ```
 ### Governance.GetConfig
@@ -5724,8 +5811,9 @@ Output example:
 }
 
 options:
-  -h, --help     show this help message and exit
-  --proxy PROXY  🔗 the URL of the proxy
+  -h, --help                                 show this help message and exit
+  --proxy PROXY                              🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]  custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
 
 ```
 ### Governance.GetDelegatedVoteInfo
@@ -5751,10 +5839,11 @@ Output example:
 }
 
 options:
-  -h, --help           show this help message and exit
-  --contract CONTRACT  the bech32 address of the contract
-  --user USER          the bech32 address of the user
-  --proxy PROXY        🔗 the URL of the proxy
+  -h, --help                                 show this help message and exit
+  --contract CONTRACT                        the bech32 address of the contract
+  --user USER                                the bech32 address of the user
+  --proxy PROXY                              🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]  custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
 
 ```
 ## Group **ConfigEnv**
@@ -6108,11 +6197,12 @@ usage: mxpy get account [-h] ...
 Get info about an account.
 
 options:
-  -h, --help         show this help message and exit
-  --alias ALIAS      the alias of the wallet if configured in address config
-  --address ADDRESS  the bech32 address
-  --proxy PROXY      the proxy url
-  --balance          whether to only fetch the balance of the address
+  -h, --help                                 show this help message and exit
+  --alias ALIAS                              the alias of the wallet if configured in address config
+  --address ADDRESS                          the bech32 address
+  --proxy PROXY                              🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]  custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
+  --balance                                  whether to only fetch the balance of the address
 
 ```
 ### Get.Storage
@@ -6125,10 +6215,11 @@ usage: mxpy get storage [-h] ...
 Get the storage (key-value pairs) of an account.
 
 options:
-  -h, --help         show this help message and exit
-  --alias ALIAS      the alias of the wallet if configured in address config
-  --address ADDRESS  the bech32 address
-  --proxy PROXY      the proxy url
+  -h, --help                                 show this help message and exit
+  --alias ALIAS                              the alias of the wallet if configured in address config
+  --address ADDRESS                          the bech32 address
+  --proxy PROXY                              🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]  custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
 
 ```
 ### Get.StorageEntry
@@ -6141,11 +6232,12 @@ usage: mxpy get storage-entry [-h] ...
 Get a specific storage entry (key-value pair) of an account.
 
 options:
-  -h, --help         show this help message and exit
-  --alias ALIAS      the alias of the wallet if configured in address config
-  --address ADDRESS  the bech32 address
-  --proxy PROXY      the proxy url
-  --key KEY          the storage key to read from
+  -h, --help                                 show this help message and exit
+  --alias ALIAS                              the alias of the wallet if configured in address config
+  --address ADDRESS                          the bech32 address
+  --proxy PROXY                              🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]  custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
+  --key KEY                                  the storage key to read from
 
 ```
 ### Get.Token
@@ -6158,11 +6250,13 @@ usage: mxpy get token [-h] ...
 Get a token of an account.
 
 options:
-  -h, --help               show this help message and exit
-  --alias ALIAS            the alias of the wallet if configured in address config
-  --address ADDRESS        the bech32 address
-  --proxy PROXY            the proxy url
-  --identifier IDENTIFIER  the token identifier. Works for ESDT and NFT. (e.g. FNG-123456, NFT-987654-0a)
+  -h, --help                                 show this help message and exit
+  --alias ALIAS                              the alias of the wallet if configured in address config
+  --address ADDRESS                          the bech32 address
+  --proxy PROXY                              🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]  custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
+  --identifier IDENTIFIER                    the token identifier. Works for ESDT and NFT. (e.g. FNG-123456,
+                                             NFT-987654-0a)
 
 ```
 ### Get.Transaction
@@ -6175,9 +6269,10 @@ usage: mxpy get transaction [-h] ...
 Get a transaction from the network.
 
 options:
-  -h, --help     show this help message and exit
-  --proxy PROXY  the proxy url
-  --hash HASH    the transaction hash
+  -h, --help                                 show this help message and exit
+  --proxy PROXY                              🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]  custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
+  --hash HASH                                the transaction hash
 
 ```
 ## Group **Token**
@@ -6288,6 +6383,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -6356,6 +6452,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -6425,6 +6522,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -6488,6 +6586,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -6547,6 +6646,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -6606,6 +6706,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -6669,6 +6770,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -6732,6 +6834,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -6801,6 +6904,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -6869,6 +6973,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -6933,6 +7038,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -6996,6 +7102,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -7066,6 +7173,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -7136,6 +7244,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -7201,6 +7310,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -7260,6 +7370,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -7319,6 +7430,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -7379,6 +7491,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -7439,6 +7552,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -7499,6 +7613,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -7559,6 +7674,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -7619,6 +7735,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -7680,6 +7797,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -7741,6 +7859,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -7802,6 +7921,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -7863,6 +7983,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -7924,6 +8045,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -7984,6 +8106,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -8049,6 +8172,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -8114,6 +8238,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -8173,6 +8298,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -8232,6 +8358,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -8294,6 +8421,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -8356,6 +8484,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -8416,6 +8545,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -8477,6 +8607,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -8538,6 +8669,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -8598,6 +8730,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -8658,6 +8791,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -8717,6 +8851,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -8778,6 +8913,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set
@@ -8839,6 +8975,7 @@ options:
   --relayer RELAYER                              the bech32 address of the relayer
   --guardian GUARDIAN                            the bech32 address of the guardian
   --proxy PROXY                                  🔗 the URL of the proxy
+  --proxy-headers KEY=VALUE [KEY=VALUE ...]      custom HTTP headers for proxy requests, e.g. 'Api-Key=mytoken'
   --send                                         ✓ whether to broadcast the transaction (default: False)
   --simulate                                     whether to simulate the transaction (default: False)
   --wait-result                                  signal to wait for the transaction result - only valid if --send is set

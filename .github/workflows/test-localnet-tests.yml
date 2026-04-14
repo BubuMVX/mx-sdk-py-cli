@@ -2,22 +2,19 @@ name: Test localnet-dependent tests
 
 on:
   pull_request:
-    branches: [main, feat/*]
+    branches: [ main, feat/* ]
   workflow_dispatch:
 
 permissions:
   contents: read
-
-env:
- BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
 
 jobs:
   localnet:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
-        python-version: [3.11]
+        os: [ ubuntu-latest, macos-latest, windows-latest ]
+        python-version: [ 3.11 ]
 
     steps:
       - name: Set up Python ${{ matrix.python-version }}
@@ -54,5 +51,5 @@ jobs:
 
       - name: Test localnet dependent tests
         run: |
-           pytest -m require_localnet .
-           python3 -m multiversx_sdk_cli.cli localnet clean --configfile=./multiversx_sdk_cli/tests/testdata/localnet_with_resolution_remote.toml
+          pytest -m require_localnet .
+          python3 -m multiversx_sdk_cli.cli localnet clean --configfile=./multiversx_sdk_cli/tests/testdata/localnet_with_resolution_remote.toml

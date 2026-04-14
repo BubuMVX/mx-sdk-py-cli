@@ -2,13 +2,14 @@ name: Install mxpy using pipx (Ubuntu)
 
 on:
   pull_request:
-    branches: [main, feat/*]
+    branches: [ main, feat/* ]
   workflow_dispatch:
 
 permissions:
   contents: read
 
 env:
+  REPOSITORY: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
   BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
 
 jobs:
@@ -17,7 +18,7 @@ jobs:
 
     strategy:
       matrix:
-        python-version: [3.11]
+        python-version: [ 3.11 ]
 
     steps:
       - name: Set up Python ${{ matrix.python-version }}
@@ -31,7 +32,7 @@ jobs:
           pipx ensurepath
       - name: Install mxpy
         run: |
-          pipx install git+https://github.com/multiversx/mx-sdk-py-cli@$BRANCH_NAME
+          pipx install "git+https://github.com/$REPOSITORY.git@$BRANCH_NAME"
       - name: Smoke test
         run: |
           mxpy --version
